@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>НАВИГАТОР - найти профессию по призванию за 3-14 дней</title>
+    <meta name="description" content="Авторская система профориентации для взрослых. Персональное ведение в Telegram. Найдите работу по душе. Бесплатная диагностика.">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -77,6 +82,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(246, 173, 85, 0.3);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .hero-button:hover {
@@ -454,6 +461,186 @@
             font-size: 1.05rem;
         }
 
+        .faq-container {
+            margin: 25px 0;
+        }
+
+        .faq-item {
+            background: #1a202c;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #4a5568;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #718096;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #63b3ed;
+            position: relative;
+        }
+
+        .faq-question:hover {
+            background: rgba(99, 179, 237, 0.1);
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .diagnostic-section {
+            background: #1a365d;
+            border: 2px solid #3182ce;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .diagnostic-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .diagnostic-text {
+            color: #e2e8f0;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .diagnostic-benefits {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .diagnostic-benefits li {
+            padding: 8px 0;
+            color: #cbd5e0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .diagnostic-benefits li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #f6ad55;
+            font-weight: bold;
+        }
+
+        .diagnostic-note {
+            font-size: 1rem;
+            color: #cbd5e0;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .diagnostic-button {
+            background: #f6ad55;
+            color: #1a202c;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(246, 173, 85, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .diagnostic-button:hover {
+            background: #ed8936;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(246, 173, 85, 0.4);
+        }
+
+        .footer-section {
+            background: #1a202c;
+            border-top: 1px solid #4a5568;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #63b3ed;
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            font-size: 1.1rem;
+            color: #cbd5e0;
+            margin-bottom: 25px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #63b3ed;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.2rem;
@@ -476,8 +663,24 @@
             .price-value {
                 font-size: 3rem;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .diagnostic-title {
+                font-size: 1.5rem;
+            }
         }
     </style>
+    
+    <!-- МЕСТО ДЛЯ ЯНДЕКС МЕТРИКИ: вставьте код сюда, перед закрывающим тегом </head> -->
+    
 </head>
 <body>
     <div class="container">
@@ -491,7 +694,7 @@
             <h1 class="hero-title">Найдите профессию, которая заряжает энергией, а не отнимает её</h1>
             <p class="hero-subtitle">Система НАВИГАТОР: от разочарования в работе к делу по душе за 3 дня – 2 недели</p>
             <p class="hero-description">Авторская 11-этапная методика персонального анализа через закрытый чат</p>
-            <button class="hero-button" onclick="scrollToBottom()">Начать поиск профессии</button>
+            <a href="https://t.me/nayti_professiyu_bot?start=c1749651064709-test" class="hero-button">Начать поиск профессии</a>
         </div>
 
         <!-- БЛОК 3: Описание проблемы -->
@@ -731,7 +934,7 @@
         </div>
 
         <!-- БЛОК 12: Стоимость -->
-        <div class="price-section">
+        <div class="price-section" id="order">
             <h2 class="price-title">Начните свой путь к профессии мечты</h2>
             <div class="price-program">ПРОГРАММА НАВИГАТОР</div>
             <div class="price-value">15 000 ₽</div>
@@ -746,7 +949,7 @@
                 <li>✓ Работа в удобном для вас темпе</li>
             </ul>
             
-            <button class="hero-button" style="margin: 30px 0;" onclick="scrollToBottom()">Найти своё призвание</button>
+            <a href="https://t.me/nayti_professiyu_bot?start=c1749651064709-test" class="hero-button" style="margin: 30px 0;">Найти своё призвание</a>
             
             <div class="price-bonus">
                 <p>⚡ Старт в течение 24 часов после оплаты</p>
@@ -791,15 +994,91 @@
                 </div>
             </div>
         </div>
+
+        <!-- БЛОК 15: Часто задаваемые вопросы -->
+        <div class="content-block" id="faq">
+            <h2 class="section-title">Ответы на частые вопросы</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">В: От чего зависит скорость прохождения?</div>
+                    <div class="faq-answer">О: От глубины ваших ответов и частоты общения. Чем больше времени уделяете программе, тем быстрее получите результат. Самые активные проходят за 3-5 дней.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">В: Как проходит общение в Telegram?</div>
+                    <div class="faq-answer">О: Создаю персональный закрытый чат только для вас. Задаю вопросы, вы отвечаете в удобное время. Изучаю ваши ответы и готовлю следующие вопросы. Полная конфиденциальность.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">В: Не поздно ли менять профессию в моём возрасте?</div>
+                    <div class="faq-answer">О: Более 40% моих клиентов старше 40 лет. Зрелый возраст — это преимущество, а не препятствие для смены профессии.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">В: Можно ли совмещать с текущей работой?</div>
+                    <div class="faq-answer">О: Да, программа специально адаптирована для работающих людей. Отвечаете на вопросы в удобное время.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">В: Что если у меня нет времени отвечать каждый день?</div>
+                    <div class="faq-answer">О: Программа адаптируется под ваш ритм. Можете отвечать раз в 2-3 дня. Главное — качество ответов, а не скорость.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК 16: Бесплатная диагностика -->
+        <div class="diagnostic-section" id="diagnostic">
+            <h2 class="diagnostic-title">Не знаете, подойдёт ли вам программа?</h2>
+            <p class="diagnostic-text"><strong>Запишитесь на бесплатную диагностическую сессию</strong></p>
+            
+            <p class="diagnostic-note">За 20-30 минут в чате я помогу вам:</p>
+            <ul class="diagnostic-benefits">
+                <li>Определить основную проблему в карьере</li>
+                <li>Понять, готовы ли вы к изменениям</li>
+                <li>Получить первые рекомендации по направлению поиска</li>
+            </ul>
+            
+            <p class="diagnostic-note">Это поможет вам принять взвешенное решение о участии в полной программе НАВИГАТОР.</p>
+            
+            <a href="tg://resolve?domain=nayti_professiyu_bot&start=c1749504917997-test" class="diagnostic-button">Записаться на бесплатную диагностику</a>
+        </div>
+    </div>
+
+    <!-- БЛОК 17: Подвал страницы -->
+    <div class="footer-section">
+        <div class="container">
+            <div class="footer-logo">НАВИГАТОР</div>
+            <div class="footer-description">Система поиска профессии по призванию</div>
+            <div class="footer-links">
+                <a href="privacy.html">Политика конфиденциальности</a>
+                <a href="terms.html">Публичная оферта</a>
+            </div>
+            <div class="footer-copyright">© 2025 НАВИГАТОР. Все права защищены.</div>
+        </div>
     </div>
 
     <script>
-        function scrollToBottom() {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
+        // FAQ аккордеон
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Закрыть все ответы
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                });
+                
+                // Открыть текущий, если он не был активен
+                if (!isActive) {
+                    answer.classList.add('active');
+                    question.classList.add('active');
+                }
             });
-        }
+        });
     </script>
 </body>
 </html>
